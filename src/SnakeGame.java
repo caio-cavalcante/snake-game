@@ -73,6 +73,9 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
             g.setFont(new Font("Arial", Font.BOLD, 32));
             g.setColor(Color.RED);
             g.drawString("Game Over: " + String.valueOf(snakeBody.size()), (boardWidth / 2) - 100, (boardHeight / 2));
+            g.setFont(new Font("Arial", Font.BOLD, 16));
+            g.setColor(Color.GRAY);
+            g.drawString("Press SPACE to play again.", (boardWidth / 2) - 100, (boardHeight / 2 + 35));
         } else {
             g.drawString("Score: " + String.valueOf(snakeBody.size()), tileSize - 16, tileSize);
         }
@@ -143,6 +146,17 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT && velocityX != -1) {
             velocityX = 1;
             velocityY = 0;
+        }
+
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            gameLoop.start();
+            gameOver = false;
+            snakeHead = new Tile(4, 4);
+            snakeBody = new ArrayList<Tile>();
+            placeFood();
+            velocityX = 0;
+            velocityY = 0;
+            repaint();
         }
     }
 
