@@ -5,7 +5,7 @@ import java.util.Random;
 import javax.swing.*;
 
 public class SnakeGame extends JPanel implements ActionListener, KeyListener {
-    private class Tile {
+    private static class Tile {
         int x;
         int y;
 
@@ -39,7 +39,7 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
         setFocusable(true);
 
         snakeHead = new Tile(4, 4);
-        snakeBody = new ArrayList<Tile>();
+        snakeBody = new ArrayList<>();
 
         food = new Tile(0, 0);
         random = new Random();
@@ -72,12 +72,12 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
         if (gameOver) {
             g.setFont(new Font("Arial", Font.BOLD, 32));
             g.setColor(Color.RED);
-            g.drawString("Game Over: " + String.valueOf(snakeBody.size()), (boardWidth / 2) - 100, (boardHeight / 2));
+            g.drawString("Game Over: " + snakeBody.size(), (boardWidth / 2) - 100, (boardHeight / 2));
             g.setFont(new Font("Arial", Font.BOLD, 16));
             g.setColor(Color.GRAY);
             g.drawString("Press SPACE to play again.", (boardWidth / 2) - 100, (boardHeight / 2 + 35));
         } else {
-            g.drawString("Score: " + String.valueOf(snakeBody.size()), tileSize - 16, tileSize);
+            g.drawString("Score: " + snakeBody.size(), tileSize - 16, tileSize);
         }
     }
 
@@ -152,7 +152,7 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
             gameLoop.start();
             gameOver = false;
             snakeHead = new Tile(4, 4);
-            snakeBody = new ArrayList<Tile>();
+            snakeBody = new ArrayList<>();
             placeFood();
             velocityX = 0;
             velocityY = 0;
